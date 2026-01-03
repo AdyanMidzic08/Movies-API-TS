@@ -1,10 +1,13 @@
 import express from "express";
+import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { Movie } from "./types";
 import { loadMovies, saveMovies } from "./storage";
 
 const app = express();
 app.use(express.json());
+app.use(express.static("public"));
+app.use("/dist", express.static(path.join(__dirname, "../dist")));
 
 let movies: Array<Movie> = [];
 
@@ -70,16 +73,17 @@ app.put("/movies/:id", (req, res) => {
   let searchId = req.params.id;
 
   for (let i = 0; i < movies.length; i++) {
-
     if (movies[i].id == searchId) {
       if (movies[i].watched) {
         movies[i].watched = false;
       } else {
         movies[i].watched = true;
       }
-      return res.status(201).json({message: "Movie was successfully changed"});
+      return res
+        .status(201)
+        .json({ message: "Movie was successfully changed" });
     }
-    saveMovies(movies)
+    saveMovies(movies);
     res.send(movies);
   }
 });
