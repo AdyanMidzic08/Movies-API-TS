@@ -138,6 +138,23 @@ li {
     background-color: #ffffff;
 }
 
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
 .target-section {
     background-color: var(--color-medium);
     color: var(--text-color);
