@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meine Watchlist</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="../../dist/script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1><i class="fas fa-video"></i> Meine Watchlist</h1>
+      <a
+        href="../index.html"
+        style="color: white; text-decoration: none; font-size: 0.9rem"
+        ><i class="fas fa-arrow-left"></i> Zurück</a
+      >
+    </header>
+
+    <main>
+      <section class="card input-section">
+        <h2><i class="fas fa-plus-circle"></i> Film hinzufügen</h2>
+        <div class="input-group">
+          <input
+            type="text"
+            id="item-input"
+            placeholder="Filmtitel eingeben..."
+          />
+          <button id="add-btn"><i class="fas fa-save"></i> Speichern</button>
+        </div>
+      </section>
+
+      <section class="card list-section">
+        <h2><i class="fas fa-clipboard-list"></i> Aktuelle Liste</h2>
+        <ul id="item-list">
+          <li>
+            <span><i class="fas fa-film"></i> Inception</span>
+            <a href="#details-section" class="list-link"
+              ><i class="fas fa-info-circle"></i> Details</a
+            >
+          </li>
+          <li>
+            <span><i class="fas fa-film"></i> Interstellar</span>
+            <a href="#details-section" class="list-link"
+              ><i class="fas fa-info-circle"></i> Details</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <section id="details-section" class="card target-section">
+        <h2><i class="fas fa-star"></i> Filmdetails</h2>
+        <p>Hier könnten Details zum ausgewählten Film stehen.</p>
+        <button id="action-btn" class="primary-btn">
+          <i class="fas fa-check"></i> Als gesehen markieren
+        </button>
+      </section>
+    </main>
+
+  </body>
+</html>
