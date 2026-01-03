@@ -2,7 +2,6 @@ import express from "express";
 import { v4 as uuidv4 } from "uuid";
 import { Movie } from "./types";
 import { loadMovies, saveMovies } from "./storage";
-import { error } from "node:console";
 
 const app = express();
 app.use(express.json());
@@ -30,21 +29,19 @@ app.post("/movies", (req, res) => {
 
   if (!title || !year) {
     return res.status(400).json({ error: "Forgot to add text or Year!" });
-  }else {
-
+  } else {
     let movie: Movie = {
-        id: uuidv4(),
-        title,
-        year,
-        watched: false,
+      id: uuidv4(),
+      title,
+      year,
+      watched: false,
     };
 
     movies.push(movie);
     saveMovies(movies);
     res.send(movies);
-    return res.status(200).json({message: "successfully added a movie"});
-}
-  
+    return res.status(200).json({ message: "successfully added a movie" });
+  }
 });
 
 app.delete("/movies/:id", (req, res) => {
@@ -66,6 +63,24 @@ app.delete("/movies/:id", (req, res) => {
     saveMovies(movies);
     res.send(movies);
     return res.status(201).json({ message: "Movie was successfully deleted!" });
+  }
+});
+
+app.put("/movies/:id", (req, res) => {
+  let searchId = req.params.id;
+
+  for (let i = 0; i < movies.length; i++) {
+
+    if (movies[i].id == searchId) {
+      if (movies[i].watched) {
+        movies[i].watched = false;
+      } else {
+        movies[i].watched = true;
+      }
+      return res.status(201).json({message: "Movie was successfully changed"});
+    }
+    saveMovies(movies)
+    res.send(movies);
   }
 });
 
