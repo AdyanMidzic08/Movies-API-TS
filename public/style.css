@@ -59,8 +59,8 @@ h2 {
     gap: 10px;
 }
 
-input[type="text"] {
-    flex-grow: 1;
+input[type="text"],
+input[type="number"] {
     padding: 12px;
     border: 2px solid var(--color-light-accent);
     border-radius: 6px;
@@ -69,7 +69,16 @@ input[type="text"] {
     transition: border-color 0.3s;
 }
 
-input[type="text"]:focus {
+input[type="text"] {
+    flex-grow: 1;
+}
+
+input[type="number"] {
+    width: 100px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
     outline: none;
     border-color: var(--color-accent);
 }
@@ -87,16 +96,16 @@ button, .primary-btn {
     text-align: center;
 }
 
-#add-btn {
+#add-button {
     background-color: var(--color-medium);
     color: var(--text-color);
 }
 
-#add-btn:hover {
+#add-button:hover {
     background-color: var(--color-dark);
 }
 
-#add-btn:active {
+#add-button:active {
     transform: scale(0.98);
 }
 
