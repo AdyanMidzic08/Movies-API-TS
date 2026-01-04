@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meine Watchlist</title>
+    <title>My Watchlist</title>
     <link rel="stylesheet" href="../style.css" />
     <link
       rel="stylesheet"
@@ -13,30 +13,30 @@
   </head>
   <body>
     <header>
-      <h1><i class="fas fa-video"></i> Meine Watchlist</h1>
+      <h1><i class="fas fa-video"></i> My Watchlist</h1>
       <a
         href="../index.html"
         style="color: white; text-decoration: none; font-size: 0.9rem"
-        ><i class="fas fa-arrow-left"></i> Zurück</a
+        ><i class="fas fa-arrow-left"></i> Back</a
       >
     </header>
 
     <main>
       <section class="card input-section">
-        <h2><i class="fas fa-plus-circle"></i> Film hinzufügen</h2>
+        <h2><i class="fas fa-plus-circle"></i> Add Movie</h2>
         <div class="input-group">
           <input
             type="text"
             id="title-input"
-            placeholder="Filmtitel eingeben..."
+            placeholder="Enter movie title..."
           />
-          <input type="number" id="year-input" placeholder="Jahr..." />
-          <button id="add-button"><i class="fas fa-save"></i> Speichern</button>
+          <input type="number" id="year-input" placeholder="Year..." />
+          <button id="add-button"><i class="fas fa-save"></i> Save</button>
         </div>
       </section>
 
       <section class="card list-section">
-        <h2><i class="fas fa-clipboard-list"></i> Aktuelle Liste</h2>
+        <h2><i class="fas fa-clipboard-list"></i> Current List</h2>
         <ul id="item-list">
           <li>
             <span><i class="fas fa-film"></i> Inception</span>
@@ -54,10 +54,12 @@
       </section>
 
       <section id="details-section" class="card target-section">
-        <h2><i class="fas fa-star"></i> Filmdetails</h2>
-        <p>Hier könnten Details zum ausgewählten Film stehen.</p>
+        <h2><i class="fas fa-star"></i> Movie Details</h2>
+        <p id="contentDetails">
+          Details about the selected movie could appear here.
+        </p>
         <button id="action-btn" class="primary-btn">
-          <i class="fas fa-check"></i> Als gesehen markieren
+          <i class="fas fa-check"></i> Mark as watched
         </button>
       </section>
     </main>
