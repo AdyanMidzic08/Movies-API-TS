@@ -71,20 +71,31 @@ app.delete("/movies/:id", (req, res) => {
 
 app.put("/movies/:id", (req, res) => {
   let searchId = req.params.id;
+  let found = false;
 
   for (let i = 0; i < movies.length; i++) {
     if (movies[i].id == searchId) {
-      if (movies[i].watched) {
-        movies[i].watched = false;
+      console.log(
+        "Updating movie:",
+        movies[i].title,
+        "New watched status:",
+        req.body.watched
+      );
+      if (req.body.watched !== undefined) {
+        movies[i].watched = req.body.watched;
       } else {
-        movies[i].watched = true;
+        movies[i].watched = !movies[i].watched;
       }
-      return res
-        .status(201)
-        .json({ message: "Movie was successfully changed" });
+      found = true;
+      break;
     }
+  }
+
+  if (found) {
     saveMovies(movies);
-    res.send(movies);
+    return res.status(200).json({ message: "Movie was successfully changed" });
+  } else {
+    return res.status(404).json({ error: "Movie not found" });
   }
 });
 

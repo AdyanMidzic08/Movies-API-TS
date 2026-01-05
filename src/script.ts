@@ -1,8 +1,13 @@
 let items = document.getElementById("item-list") as HTMLUListElement;
+let watchedItems = document.getElementById("watched-list") as HTMLUListElement;
 let addButton = document.getElementById("add-button") as HTMLButtonElement;
 let titleInput = document.getElementById("title-input") as HTMLInputElement;
 let yearInput = document.getElementById("year-input") as HTMLInputElement;
 let outputDetails = document.getElementById("contentDetails") as HTMLParagraphElement;
+let actionBtn = document.getElementById("action-btn") as HTMLButtonElement;
+
+let currentMovieId: string | null = null;
+let currentMovieWatched: boolean = false;
 
 const apiUrl: string = "http://localhost:3000/movies";
 
@@ -61,18 +66,25 @@ async function deleteMovie(id: string) {
 (window as any).deleteMovie = deleteMovie;
 
 async function loadMovies() {
-  items.innerHTML = "";
+  if (items) items.innerHTML = "";
+  if (watchedItems) watchedItems.innerHTML = "";
+
   try {
     let response = await fetch(apiUrl);
     let movie = await response.json();
-    console.log(movie);
+    console.log("Loaded movies:", movie);
 
     for (let i = 0; i < movie.length; i++) {
       let title = movie[i].title;
       let year = movie[i].year;
       let id = movie[i].id;
+      let watched = movie[i].watched;
 
-      items.innerHTML += `
+      console.log(`Movie: ${title}, Watched: ${watched}`);
+
+      if (!watched) {
+        if (items) {
+          items.innerHTML += `
             <li>
                 <span><i class="fas fa-film"></i>  ${title} (${year})</span>
                 <div class="action-buttons">
@@ -81,15 +93,30 @@ async function loadMovies() {
                 </div>
           </li>
             `;
+        }
+      } else {
+        if (watchedItems) {
+          watchedItems.innerHTML += `
+            <li class="watched">
+                <span><i class="fas fa-film"></i>  ${title} (${year})</span>
+                <div class="action-buttons">
+                    <a href="#details-section" onclick="showDetails('${id}')" class="list-link"> <i class="fas fa-info-circle"></i> Details</a>
+                    <button onclick="deleteMovie('${id}')" class="delete-btn"><i class="fas fa-trash"></i></button>
+                </div>
+          </li>
+            `;
+        }
+      }
     }
   } catch (error) {
-    console.error("List not found");
+    console.error("List not found", error);
   }
 }
 
 async function showDetails(id: string) {
   outputDetails.innerHTML = "";
   let movieId = id;
+  currentMovieId = id;
 
   try {
     let response = await fetch(apiUrl);
@@ -102,16 +129,50 @@ async function showDetails(id: string) {
         let year = movie[i].year;
         let id = movie[i].id;
         let watchStatus = movie[i].watched;
+        currentMovieWatched = watchStatus;
         outputDetails.innerHTML = `
             <h2>${title} (${year})</h2>
             <p><strong>Movie ID:</strong> ${id}</p>
             <p><strong>Watched:</strong> ${watchStatus ? "Yes" : "No"}</p>
       `;
+
+        if (watchStatus) {
+          actionBtn.innerHTML = '<i class="fas fa-times"></i> Unwatch';
+        } else {
+          actionBtn.innerHTML =
+            '<i class="fas fa-check"></i> Have you watched?';
+        }
       }
     }
   } catch (error) {
     console.error("List not found");
   }
 }
+//global function
+(window as any).showDetails = showDetails;
+
+actionBtn.addEventListener("click", async () => {
+  if (currentMovieId) {
+    let newStatus = !currentMovieWatched;
+
+    try {
+      let response = await fetch(`${apiUrl}/${currentMovieId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ watched: newStatus }),
+      });
+      if (response.ok) {
+        showDetails(currentMovieId);
+        loadMovies();
+      }
+    } catch (error) {
+      console.error("Error toggling watched status", error);
+    }
+  } else {
+    alert("No movie selected!");
+  }
+});
 
 loadMovies();

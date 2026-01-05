@@ -174,3 +174,13 @@ li {
 .primary-btn:hover {
     background-color: #946e7a;
 }
+
+.watched {
+    background-color: #e0e0e0; /* Dunklerer Hintergrund für watched */
+    opacity: 0.8;
+}
+
+.watched span {
+    text-decoration: line-through; /* Text durchstreichen */
+    color: #888;
+}
