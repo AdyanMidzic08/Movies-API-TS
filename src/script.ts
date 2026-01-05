@@ -3,8 +3,11 @@ let watchedItems = document.getElementById("watched-list") as HTMLUListElement;
 let addButton = document.getElementById("add-button") as HTMLButtonElement;
 let titleInput = document.getElementById("title-input") as HTMLInputElement;
 let yearInput = document.getElementById("year-input") as HTMLInputElement;
-let outputDetails = document.getElementById("contentDetails") as HTMLParagraphElement;
+let outputDetails = document.getElementById(
+  "contentDetails"
+) as HTMLParagraphElement;
 let actionBtn = document.getElementById("action-btn") as HTMLButtonElement;
+let clearBtn = document.getElementById("clear-btn") as HTMLButtonElement;
 
 let currentMovieId: string | null = null;
 let currentMovieWatched: boolean = false;
@@ -174,5 +177,14 @@ actionBtn.addEventListener("click", async () => {
     alert("No movie selected!");
   }
 });
+
+if (clearBtn) {
+  clearBtn.addEventListener("click", () => {
+    outputDetails.innerHTML =
+      "Details about the selected movie could appear here.";
+    currentMovieId = null;
+    actionBtn.innerHTML = '<i class="fas fa-check"></i> Mark as watched';
+  });
+}
 
 loadMovies();

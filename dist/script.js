@@ -6,6 +6,7 @@ let titleInput = document.getElementById("title-input");
 let yearInput = document.getElementById("year-input");
 let outputDetails = document.getElementById("contentDetails");
 let actionBtn = document.getElementById("action-btn");
+let clearBtn = document.getElementById("clear-btn");
 let currentMovieId = null;
 let currentMovieWatched = false;
 const apiUrl = "http://localhost:3000/movies";
@@ -166,4 +167,12 @@ actionBtn.addEventListener("click", async () => {
         alert("No movie selected!");
     }
 });
+if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+        outputDetails.innerHTML =
+            "Details about the selected movie could appear here.";
+        currentMovieId = null;
+        actionBtn.innerHTML = '<i class="fas fa-check"></i> Mark as watched';
+    });
+}
 loadMovies();
