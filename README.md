@@ -24,7 +24,7 @@ A full-stack TypeScript application for managing your personal movie watchlist. 
 1.  **Clone the repository**
 
     ```bash
-    git clone <repository-url>
+    git clone <https://github.com/AdyanMidzic08/Movies-API-TS>
     cd Movies-API
     ```
 
