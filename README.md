@@ -57,7 +57,7 @@ _Note: You need to run `npm run build` manually if you make changes to the front
 Start the compiled server:
 
 ```bash
-npm run dev
+npm run
 ```
 
 Open your browser and navigate to:

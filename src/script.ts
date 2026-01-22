@@ -3,9 +3,7 @@ let watchedItems = document.getElementById("watched-list") as HTMLUListElement;
 let addButton = document.getElementById("add-button") as HTMLButtonElement;
 let titleInput = document.getElementById("title-input") as HTMLInputElement;
 let yearInput = document.getElementById("year-input") as HTMLInputElement;
-let outputDetails = document.getElementById(
-  "contentDetails"
-) as HTMLParagraphElement;
+let outputDetails = document.getElementById("contentDetails") as HTMLParagraphElement;
 let actionBtn = document.getElementById("action-btn") as HTMLButtonElement;
 let clearBtn = document.getElementById("clear-btn") as HTMLButtonElement;
 

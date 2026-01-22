@@ -9,6 +9,7 @@ let actionBtn = document.getElementById("action-btn");
 let clearBtn = document.getElementById("clear-btn");
 let currentMovieId = null;
 let currentMovieWatched = false;
+
 const apiUrl = "http://localhost:3000/movies";
 async function addMovie() {
     let title = titleInput.value;
